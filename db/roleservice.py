@@ -38,8 +38,6 @@ class RoleService():
 
             return role
 
-
-
     async def get_roles(self):
 
         session = self.get_async_session()
@@ -49,7 +47,6 @@ class RoleService():
             roles = await db.execute(select(Roles))
             return roles.scalars().all()
 
-
     async def get_role(self, id):
 
         session = self.get_async_session()
@@ -58,6 +55,23 @@ class RoleService():
 
             roles = await db.execute(select(Roles).where(Roles.id==id))
             return roles.scalars().one()
+
+    async def update_role(self, id, **kwargs):
+        
+        session = self.get_async_session()
+
+        async with session() as db:
+            role = await db.execute(select(Roles).where(Roles.id == id))
+
+            role = role.scalars().one()
+
+
+            for key, value in kwargs.items():
+                setattr(role, key, value)
+
+            await db.commit()
+
+            return role
 
 
 

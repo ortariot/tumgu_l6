@@ -49,6 +49,14 @@ class Roles(Base):
         return f"{self.id} - {self.name} - {self.level}"
 
 
+    def to_dict(self):
+        return { 
+            "id": self.id,
+            "name": self.name,
+            "level": self.level
+        }
+
+
 
 async def create_db():
     #docker run --name pg_test -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:latest 
