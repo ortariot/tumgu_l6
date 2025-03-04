@@ -29,6 +29,6 @@ SQLAlchemy==2.0.38
 - python main.py (запуск)
 
 
-## celeru start:
+## celery start:
 
 - celery -A tasker.task worker --loglevel=info
